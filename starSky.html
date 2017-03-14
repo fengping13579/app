@@ -1,0 +1,135 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,user-scalable=no" name="viewport">
+    <style>
+    </style>
+</head>
+<body>
+
+<!--http://blogs.sitepointstatic.com/examples/tech/canvas-curves/quadratic-curve.html-->
+
+<!--以上链接为贝塞尔曲线交互页面-->
+<canvas id='canvas' width='1000' height='800'></canvas>
+<script type="text/javascript">
+    var canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
+
+    context.fillStyle = 'red';
+    context.font='bold 40px Arial';
+    context.fillText('56789098765，你妹的',100,650);
+
+    context.beginPath();
+
+//    var linear = context.createLinearGradient(0,0,800,800);
+    var linear = context.createRadialGradient(canvas.width/2,canvas.height,0,canvas.width/2,canvas.height,canvas.height);
+
+    linear.addColorStop(0.0,'#035');
+    linear.addColorStop(1.0,'#000');
+    context.fillStyle = linear;
+
+    context.fillRect(0,0,1000,800);
+//    context.rect(0, 0, 800, 800);
+    context.closePath();
+
+
+
+    var stars = [];
+    var showStar =[];
+    //    画五角星、、
+    addstar(300);
+
+    moon(context,1.5,800,200,100,30,'#fb5');
+
+    drawland(context);
+
+    function drawland(ctx){
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(0,600);
+        ctx.bezierCurveTo(200,700,600,420,1000,600);
+        ctx.lineTo(1000,800);
+        ctx.lineTo(0,800);
+
+        var linear = context.createLinearGradient(0,0,400,400);
+
+        linear.addColorStop(0.0,'#030');
+        linear.addColorStop(1.0,'#580');
+        ctx.fillStyle = linear;
+        ctx.fill();
+        ctx.closePath();
+        ctx.restore();
+
+    }
+
+    function addstar(n){
+        for(var i=0;i<n;i++){
+            var r =Math.random()*3+5;
+            var x =Math.random()*(canvas.width-2*r)+r;
+            var y =(Math.random()*(canvas.height-2*r)+r)*0.65;
+            var a =Math.random()*360;
+            drawStar(context,r,x,y,a);
+        }
+    }
+    //    定义画星星的函数
+    function drawStar(ctx,r,x,y,rot){
+        ctx.save();
+        //矩阵方法进行缩放和位移
+        // transform(a,b,c,d,e,f)
+        // a,d 水平，垂直缩放，
+        // c,d 水平，垂直倾斜
+        // e,f 水平，垂直位移；
+        ctx.transform(r,0,0,r,x,y);
+
+        //分别设置
+        ctx.rotate((rot/180*Math.PI));
+//        ctx.translate(x,y);
+//        ctx.scale(r,r);
+        drawPath(ctx);
+
+        ctx.fillStyle='#fb3';
+//        ctx.lineWidth=6;
+        ctx.fill();
+
+        ctx.restore();
+    }
+    function drawPath(ctx){
+        ctx.beginPath();
+
+        for(var i=0;i<5;i++){
+            ctx.lineTo(Math.cos((18+i*72)/180*Math.PI),-Math.sin((18+i*72)/180*Math.PI));
+            ctx.lineTo(Math.cos((54+i*72)/180*Math.PI)*0.5,-Math.sin((54+i*72)/180*Math.PI)*0.5);
+        }
+        ctx.closePath();
+
+    }
+
+    //    绘制0,0点为基础一个单位大小的月亮.通过改变其他参数设置月亮的位置及大小
+    function moon(ctx,d,x,y,r,rot,fillColor){
+        ctx.save();
+        ctx.translate(x,y);
+        ctx.rotate(rot/180*Math.PI);
+        ctx.scale(r,r);
+        pathMoon(ctx,d);
+        ctx.fillStyle = fillColor || '#fb5';
+        ctx.fill();
+        ctx.restore();
+    }
+    function pathMoon(ctx,d){
+        ctx.beginPath();
+        ctx.arc(0,0,1,0.5*Math.PI,1.5*Math.PI,true);
+        ctx.moveTo(0,-1);
+
+        //曲线绘制弧线
+//        ctx.arcTo(d,0,0,1,dis(0,-1,d,0)/d);
+        //贝塞尔函数绘制弧线、、相比arcTo ,quadraticCurveTo的方式更容易理解和使用。。。
+        ctx.quadraticCurveTo(1.2,0,0,1);//参数为 控制点和结束点的坐标
+        ctx.closePath();
+    }
+
+    function dis(x1,y1,x2,y2){
+        return Math.sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
+    }
+</script>
+</body>
+</html>

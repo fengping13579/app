@@ -1,0 +1,62 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,user-scalable=no" name="viewport">
+    <style>
+    </style>
+</head>
+<body>
+<canvas id='canvas' width='800' height='800'></canvas>
+
+<script type="text/javascript">
+    //画个矩形诅咒你。。
+    var canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
+
+    var linear = context.createLinearGradient(0,0,400,400);
+
+    linear.addColorStop(0.0,'#fff');
+    linear.addColorStop(0.2,'red');
+    linear.addColorStop(0.4,'blue');
+    linear.addColorStop(0.6,'green');
+    linear.addColorStop(0.8,'yellow');
+    linear.addColorStop(1.0,'#000');
+    context.fillStyle = linear;
+    context.fillRect(0,0,800,800);
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,141 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,user-scalable=no" name="viewport">
+    <style>
+    </style>
+</head>
+<body>
+<canvas id='canvas' width='800' height='800' style="border:1px solid #333"></canvas>
+
+<script type="text/javascript">
+    //画个矩形诅咒你。。
+    var canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
+
+//    var backgroundImg = new Image();
+//    backgroundImg.src = './img/100.png';
+//    backgroundImg.onload=function(){
+//        var pat = context.createPattern(backgroundImg,'no-repeat');
+//        context.fillStyle = pat;
+//        context.fillRect(0,0,800,800);
+//
+//    }
+
+    //画布上星星。。
+//    var backCanvas = createBackgroundCanvas();
+//    var backCanvas = createBackgroundCanvas1();
+    var backCanvas = createBackgroundCanvas2();
+    var par = context.createPattern(backCanvas,'repeat');
+    context.fillStyle = par;
+    context.fillRect(0,0,800,800);
+
+//    创建星星画布
+    function createBackgroundCanvas(){
+        var backCanvas = document.createElement('canvas');
+        backCanvas.width = 100;
+        backCanvas.height = 100;
+        var backCanvasContext = backCanvas.getContext('2d');
+        drawStar(backCanvasContext,50,50,50,0);
+        return backCanvas;
+    }
+
+//    创建圆画布
+    function createBackgroundCanvas1(){
+        var backCanvas = document.createElement('canvas');
+        backCanvas.width = 100;
+        backCanvas.height = 100;
+        var backCanvasContext = backCanvas.getContext('2d');
+        backCanvasContext.fillStyle = 'green';
+        backCanvasContext.beginPath();
+        backCanvasContext.arc(50,50,50,0,2*Math.PI);
+        backCanvasContext.closePath();
+        backCanvasContext.fill();
+        return backCanvas;
+    }
+
+
+    //    创建正方形画布
+    function createBackgroundCanvas2(){
+        var backCanvas = document.createElement('canvas');
+        backCanvas.width = 100;
+        backCanvas.height = 100;
+        var backCanvasContext = backCanvas.getContext('2d');
+        backCanvasContext.strokeStyle = 'red';
+        backCanvasContext.lineWidth=1;
+        backCanvasContext.beginPath();
+        backCanvasContext.strokeRect(25,25,50,50);
+        backCanvasContext.rotate((40/180*Math.PI));
+
+        backCanvasContext.closePath();
+        backCanvasContext.stroke();
+        return backCanvas;
+    }
+
+    //    定义画星星的函数
+    function drawStar(ctx,r,x,y,rot){
+        ctx.save();
+        //矩阵方法进行缩放和位移
+        // transform(a,b,c,d,e,f)
+        // a,d 水平，垂直缩放，
+        // c,d 水平，垂直倾斜
+        // e,f 水平，垂直位移；
+        ctx.transform(r,0,0,r,x,y);
+
+        //分别设置
+        ctx.rotate((rot/180*Math.PI));
+//        ctx.translate(x,y);
+//        ctx.scale(r,r);
+        drawPath(ctx);
+
+        ctx.fillStyle='#fb3';
+        ctx.fill();
+        ctx.restore();
+    }
+    function drawPath(ctx){
+        ctx.beginPath();
+
+        for(var i=0;i<5;i++){
+            ctx.lineTo(Math.cos((18+i*72)/180*Math.PI),-Math.sin((18+i*72)/180*Math.PI));
+            ctx.lineTo(Math.cos((54+i*72)/180*Math.PI)*0.4,-Math.sin((54+i*72)/180*Math.PI)*0.4);
+        }
+        ctx.closePath();
+    }
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

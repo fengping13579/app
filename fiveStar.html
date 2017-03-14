@@ -1,0 +1,104 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,user-scalable=no" name="viewport">
+    <style>
+    </style>
+</head>
+<body>
+<canvas id='canvas' width='800' height='1000'></canvas>
+
+<script type="text/javascript">
+    var canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
+
+    context.beginPath();
+    context.rect(0, 10, 800, 600);
+    context.closePath();
+    context.fillStyle='red';
+    context.fill();
+
+    context.beginPath();
+    context.moveTo(0,10);
+    context.lineTo(0,1000);
+    context.lineWidth=10;
+    context.strokeStyle='blue';
+    context.lineCap ='round';
+    context.stroke();
+
+    drawStar(context,60,5,600,200,0);
+
+    drawCir(context,'yellow',600,400,100);
+    drawCir(context,'red',600,400,80);
+    drawCir(context,'blue',600,400,60);
+    drawStar(context,60,25,600,400,0);
+
+//    画五角星、、
+    drawStar(context,100,40,150,250,0);
+
+//    四个小星星
+
+    drawStar(context,100,40,150,250,0);
+    drawStar(context,25,10,300,100,90);
+    drawStar(context,25,10,350,200,186);
+    drawStar(context,25,10,350,300,82);
+    drawStar(context,25,10,300,400,38);
+
+//    定义画星星的函数
+    function drawStar(ctx,R,r,x,y,rot){
+        ctx.beginPath();
+
+        for(var i=0;i<5;i++){
+            ctx.lineTo(Math.cos((18+i*72-rot)/180*Math.PI)*R+x,-Math.sin((18+i*72-rot)/180*Math.PI)*R+y);
+            ctx.lineTo(Math.cos((54+i*72-rot)/180*Math.PI)*r+x,-Math.sin((54+i*72-rot)/180*Math.PI)*r+y);
+        }
+
+        ctx.closePath();
+        ctx.fillStyle='yellow';
+        ctx.lineWidth=6;
+        ctx.fill();
+    }
+    function drawCir(ctx,color,x,y,r){
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.arc(x,y,r,0,2*Math.PI);
+        ctx.closePath();
+        ctx.fill();
+    }
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

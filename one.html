@@ -1,0 +1,130 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta content="width=device-width,initial-scale=1.0,user-scalable=no" name="viewport">
+		<style>
+		</style>
+	</head>
+	<body>
+		<canvas id='canvas' width='640' height='360'></canvas>
+		<!-- 验证用户输入格式是否正确，只需要改变type的类型即可 -->
+		<!-- <input name='email' type='email'> -->
+		<!-- 对于必须输入的项目，只需要给input标签加上require属性即可 -->
+		<!-- <input name='text' type='text' require> -->
+		<!-- <input name='text' type='text' placeholder="例：姓名" require> -->
+		
+		<script type="text/javascript">
+			//画个矩形诅咒你。。
+			var canvas = document.getElementById('canvas');
+			if(canvas.getContext){
+				var context = canvas.getContext('2d');
+				//设置颜色
+				context.fillStyle = 'rgb(255,0,0)';
+				//从坐标（20，30）开始，画一个64*36大小的矩形
+				// context.fillRect(20,30,64,36);
+				//从坐标（20，30）开始，画一个64*64大小的正方形
+				// context.fillRect(20,30,64,64);
+			}
+			//获取当前地理位置。。。
+			// window.addEventListener('load', function(){
+			// 	//判断可否使用 geolocation
+			// 	if(navigator.geolocation){
+			// 		//定期获取所在地
+			// 		navigator.geolocation.watchPosition(update);
+			// 	}
+				
+			// },false)
+			function update(position){
+				//维度
+				var lat = position.coords.latitude;
+				//经度
+				var lng = position.coords.longitude;
+				//把经度和纬度显示出来
+				// document.write('纬度：'+lat+',经度：'+lng)
+			}
+			//用localStorage来保存数据
+			// localStorage.key = 'hehe nimei de';
+			//将localStorage中的值取出来
+			// var mess=localStorage.key
+			//’hehe nimei de‘在页面显示
+			// document.write(mess);
+			var c = document.getElementById('canvas');
+			var ctx=c.getContext('2d');
+			ctx.lineWidth = 1;
+			// ctx.strokeStyle ='red';
+			ctx.fillStyle='red';
+			// ctx.lineCap = 'square';
+			ctx.beginPath();
+			ctx.moveTo(50,30);
+			ctx.lineTo(100,30);
+			// ctx.stroke(); 
+			// ctx.strokeRect(20,20,70,40)
+			// ctx.rect(20,20,70,30);
+			// ctx.arc(200,200,150,0,360*Math.PI/180,true)
+			// ctx.arcTo(120,20,120,70,50);
+			//画个带圆角的矩形
+			ctx.arcTo(120,30,120,50,20);//130=70+60;80=20+60;20=划线的y值
+			ctx.lineTo(120,70);
+			ctx.arcTo(120,100,80,100,20);
+			ctx.lineTo(50,100);
+			ctx.arcTo(30,100,30,80,20);
+			ctx.lineTo(30,50);
+			ctx.arcTo(30,30,50,30,20);
+			// ctx.stroke();//空心矩形 
+			ctx.fill();//实心矩形
+			 var w = c.width = 400,
+			     h = c.height = 400,
+			     ctx = c.getContext('2d'),
+			     frame = 0;
+			 
+			 function anim() {
+			     window.requestAnimationFrame(anim);
+			     ++frame;
+			     for (var i = 0; i < w; ++i) {
+			         ctx.strokeStyle = i % 20 === 0 ? 'hsl(hue, 80%, 50%)'.
+				 	  replace('hue', (360 / (w / 3) * i - frame) % 360) : 'rgba(0, 0, 0, .08)';
+			         ctx.beginPath();
+			         ctx.arc(w / 2, h / 2, (i + frame) % w / 2, 0, Math.PI * 2);
+			         ctx.stroke();
+			         ctx.closePath();
+			     }
+			 }
+			  anim();
+
+		</script>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,59 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,user-scalable=no" name="viewport">
+    <style>
+    </style>
+</head>
+<body>
+<canvas id='canvas' width='800' height='800' style="border:1px solid #333;"></canvas>
+<script type="text/javascript">
+    var canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
+
+    filltrangle(context,150,150,500,500,10,'#eee');
+    for(var i=0;i<4;i++){
+        for(var j=0;j<4;j++){
+            filltrangle(context,170+i*120,170+j*120,100,100,10,'#333');
+        }
+    }
+
+
+//    stroketrangle(context,150,150,600,600,50,'red',4);
+
+    function filltrangle(ctx,x,y,width,height,r,fillColor){
+        if(2*r>width || 2*r>height){
+            return;
+        }
+        ctx.save();
+        ctx.translate(x,y);
+        pathRoundRect(ctx,width,height,r);
+        ctx.fillStyle = fillColor || 'black';
+        ctx.fill();
+        ctx.restore();
+    }
+    function stroketrangle(ctx,x,y,width,height,r,strokeColor,linewidth){
+
+        if(2*r>width || 2*r>height){
+            return;
+        }
+        ctx.save();
+        ctx.translate(x,y);
+        pathRoundRect(ctx,width,height,r);
+        ctx.strokeStyle =strokeColor || 'black';
+        ctx.lineWidth = linewidth || 1;
+        ctx.stroke();
+        ctx.restore();
+    }
+    function pathRoundRect(ctx,width,height,r){
+        ctx.beginPath();
+        ctx.arc(width-r,height-r,r,0,0.5*Math.PI);
+        ctx.arc(r,height-r,r,0.5*Math.PI,Math.PI);
+        ctx.arc(r,r,r,Math.PI,1.5*Math.PI);
+        ctx.arc(width-r,r,r,1.5*Math.PI,2*Math.PI);
+        ctx.closePath();
+    }
+
+</script>
+</body>
+</html>

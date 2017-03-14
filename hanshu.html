@@ -1,0 +1,121 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta content="width=device-width,initial-scale=1.0,user-scalable=no" name="viewport">
+		<style>
+		</style>
+	</head>
+	<body>
+		
+	</body>
+	<script type="text/javascript">
+		'use strict';
+		function PeopleClass(){
+			this.type='人';
+		}
+		PeopleClass.prototype = {
+			getType:function(){
+				alert('这是一个人')
+			}
+		};
+		function StudentClass(name,sex){
+			PeopleClass.apply(this,arguments);
+			//可继承 PeopleClass.prototype里面定义的函数。。
+			var prop;
+			for(prop in PeopleClass.prototype){
+				var proto=this.constructor.prototype;
+				if(!proto[prop]){
+					proto[prop] = PeopleClass.prototype[prop]
+				}
+				proto[prop]['super'] = PeopleClass.prototype
+			}
+			this.name= name;
+			this.sex = sex;
+		};
+		var stu = new StudentClass('chen','女');
+		alert(stu.type);
+		stu.getType()
+		function MyClass(name,age){
+			this.name = name;
+			this.age = age;
+			this.toString = function(){
+				alert(this.name+':'+this.age);
+			};
+		};
+		var cls1 = new MyClass('chen',20);
+		// cls1.toString=function(){
+		// 	alert(this.name+':'+this.age);
+		// }
+		// cls1.toString();
+		var cls2 = new MyClass('hehe',26);
+		// cls2.toString();
+		// function MyClass(name,age){
+		//     this.name = name;
+		//     this.age = age;	    
+		// }
+		// MyClass.prototype.toString= function(){
+	 //        alert(this.name +":"+ this.age);
+	 //    };
+		// var cls1 = new MyClass("liming",10);
+		// cls1.toString(); 
+
+		//利用prototype实现封装函数。
+		// function MyClass(name,age){
+		//     this.name = name;
+		//     this.age = age;	    
+		// }
+		// MyClass.prototype = {
+		// 	toString:function(){
+		// 		alert(this.name +":"+ this.age);
+		// 	},
+		// 	sayHello:function(){
+		// 		alert(this.name +",你好！");
+		// 	}
+		// }
+		var cls1 = new MyClass('feng',30);
+		// cls1.toString();
+		// cls1.sayHello();
+		//静态类
+		var StaticClass = function(){};
+		StaticClass.Name = 'nimei';
+		StaticClass.Sum = function(value1,value2){
+			return value1 + value2;
+		};
+		// alert(StaticClass.Name);
+		// alert(StaticClass.Sum(1,5));
+	</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,86 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,user-scalable=no" name="viewport">
+</head>
+<body>
+<canvas id='canvas' width='800' height='800'></canvas>
+
+<script type="text/javascript">
+    //画个矩形诅咒你。。
+    var canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
+    //画一个椭圆
+//    context.beginPath();
+//    context.ellipse(400,400,300,200,0,0,Math.PI*2);
+//    context.stroke();
+
+    CanvasRenderingContext2D.prototype.fillStar = function(r,R,x,y,rot){
+        this.beginPath();
+        for(var i=0;i<5;i++){
+            this.lineTo(Math.cos((18+i*72-rot)/180*Math.PI)*R+x,-Math.sin((18+i*72-rot)/180*Math.PI)*R+y);
+            this.lineTo(Math.cos((54+i*72-rot)/180*Math.PI)*r+x,-Math.sin((54+i*72-rot)/180*Math.PI)*r+y);
+        }
+
+        this.closePath();
+        this.fill();
+    };
+    context.fillStyle = '#058';
+    context.fillStar(140,320,400,400,0);
+
+</script>
+</body>
+</html>
+
+<!--canvas 标准-->
+<!--http://www.w3c.org/TR/2dcontext/-->
+<!--https://html.spec.whatwg.org/-->
+<!--https://code.google.com/p/explorercanvas/-->
+<!--https://github.com/arv/explorercanvas-->
+
+<!--canvasplus-->
+
+<!--https://code.google.com/p/canvasplus/-->
+
+
+
+<!--artisan js-->
+
+<!--http://artisanjs.com/-->
+
+
+
+<!--Rgraph-->
+
+<!--https://roopons.com.au/wp-content/plugins/viral-optins/js/rgraph/-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
